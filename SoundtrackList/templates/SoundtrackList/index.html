@@ -1,0 +1,9 @@
+{% if Soundtrack %}
+    <ul>
+    {% for Soundtrack in Soundtrack %}
+        <li><a href="/SoundtrackList/{{ soundtrackid }}/">{{ soundtrack.soundtrack_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No soundtracks are available.</p>
+{% endif %}

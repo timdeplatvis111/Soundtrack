@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.template import loader
+
+from .models import Soundtrack
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-
-def results(request, soundtrackID):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % soundtrackID)
-
-def detail(request, soundtrackID):
-    return HttpResponse("You're looking at Soundtrack: %s." % soundtrackID)
+    Soundtrack = Soundtrack.objects.order_by('soundtrackid')[:5]
+    template = loader.get_template('soundtrackList/index.html')
+    context = {
+        'Soundtrack': Soundtrack,
+    }
+    return HttpResponse(template.render(context, request))
